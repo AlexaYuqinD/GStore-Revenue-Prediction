@@ -55,12 +55,11 @@ def trans_Y(Y, dic):
     return Y_trans
 
 
-#def main():
-if 1 == 1:
+def main(weight):
+
     df = pd.read_csv('dfTrain.csv',dtype={'fullVisitorId': 'str'})
     var_name = list(df.columns.values)
 
-if 1 == 0:
     # delete rows that won't be used
     col_delete = ['Unnamed: 0','date','visitStartTime','geoNetwork.networkDomain'\
               ,'geoNetwork.metro','geoNetwork.city','geoNetwork.continent'\
@@ -75,6 +74,8 @@ if 1 == 0:
     data = df.drop(columns = col_delete)
     data.info()
     # Transform the discrete features into dictionary form
+    """
+    Trying different sets if features
     col_trans = ['channelGrouping','device.browser','visitNumber','device.deviceCategory',\
                  'device.isMobile','device.operatingSystem', 'geoNetwork.country',\
                  'totals.bounces','totals.hits','totals.newVisits','totals.pageviews','totals.transactionRevenue',\
@@ -95,13 +96,14 @@ if 1 == 0:
                  'totals.bounces','totals.hits','totals.newVisits','totals.pageviews','totals.transactionRevenue',\
                  'trafficSource.isTrueDirect', 'trafficSource.keyword',\
                  'trafficSource.medium','trafficSource.source','hasRevenue']
-   
+    """
     col_trans = ['trafficSource.adwordsClickInfo.adNetworkType','trafficSource.campaign','trafficSource.referralPath',\
               'channelGrouping','device.browser','visitNumber','device.deviceCategory',\
                  'device.isMobile','device.operatingSystem', 'geoNetwork.country',\
                  'totals.bounces','totals.hits','totals.newVisits','totals.pageviews','totals.transactionRevenue',\
                  'trafficSource.isTrueDirect', 'trafficSource.keyword',\
                  'trafficSource.medium','trafficSource.source','hasRevenue']
+    
     # create a dic to store all the dics of possible values
     dic_trans = {}
     e = 0
@@ -136,25 +138,22 @@ if 1 == 0:
     
     weight = np.zeros((n,))
     weight[y_data>0] = 1
-    weight[y_data==0] = 0.0001
+    weight[y_data==0] = weight
     print("Start estimation.")
     clf = MultinomialNB()
     print("Fit the model")
     clf.fit(X, Y, weight)
     print("Predict")
-    y_predict = clf.predict(X[10000:20000,:])
-    Y_data = Y[10000:20000]
-    accuracy = clf.score(X[10000:20000,:], Y[10000:20000])
+    y_predict = clf.predict(X)
+    Y_data = Y
+    accuracy = clf.score(X, Y)
     #y_predict = trans_Y(Y_labeled, dic_trans['totals.transactionRevenue'])
     print("MSE of predicted y is: {}.".format(mse(Y_data, y_predict)))
     print("Accuracy of the model is : {}.".format(accuracy))
     for i in range(200):
         print(Y_data[i],y_predict[i])
-#    return y_predict
+
+    return y_predict
     
-
-
-
-
-#y_predict = main()
+y_predict = main(0.0001)
 
