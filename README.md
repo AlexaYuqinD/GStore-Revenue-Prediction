@@ -12,6 +12,6 @@ Here are the functions of our codes:
 
 **naive_bayes.py:** train and tune Naive Bayes using sklearn packages. Feature selection was done manually. The main method allows changing of weights on the positive class samples.
 
-The outputs of the codes have been saved in the jupyter notebook.
+The outputs of the codes have been saved in the jupyter notebooks.
 
 The dataset of our project: [https://www.kaggle.com/c/ga-customer-revenue-prediction/data](https://www.kaggle.com/c/ga-customer-revenue-prediction/data)
