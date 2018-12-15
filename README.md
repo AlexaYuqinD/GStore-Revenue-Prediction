@@ -2,9 +2,9 @@
 
 Here are the functions of our codes: 
 
-**explore.ipynb:** Preprocess raw data, obtain training and test set
+**explore.ipynb:** preprocess raw data, obtain training and test set
 
-**GStore-data+visualization.ipynb:** Implement exploratory data analysis, visualize the distributions and relations of features
+**GStore-data+visualization.ipynb:** implement exploratory data analysis, visualize the distributions and relations of features
 
 **BuildModels.ipynb:** train and tune the following models: classification models including logistic regression and lightGBM, regression models including linear regression, lightGBM, XGBoost and CatBoost, combined pipelines of classification and regression models, integrated lightGBM model.
  
